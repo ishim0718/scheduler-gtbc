@@ -1,9 +1,30 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// in the html
+var saveButton = document.querySelectorAll(".saveBtn");
+var scheduleDescription = document.querySelectorAll(".description"); 
+var test = document.querySelectorAll(".hour");
+
+console.log(test);
+
 var today = dayjs();
 $('#currentDay').text(today.format('MMM D, YYYY'));
 
+renderLastRegistered();
+
+function renderLastRegistered() {
+  var description = localStorage.getItem("description");
+
+  scheduleDescription.textContent = description;
+}
+
+saveButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  
+  var description = document.querySelector(".description").value;
+  
+  localStorage.setItem("description", description);
+});
 //$(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
